@@ -24,7 +24,10 @@
 package edu.sibfu.isit.pluginz.modules.main.controllers;
 
 import edu.sibfu.isit.pluginz.framework.Controller;
-import edu.sibfu.isit.pluginz.framework.Model;
+import edu.sibfu.isit.pluginz.modules.main.models.MasterModel;
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 
 /**
  *
@@ -32,8 +35,13 @@ import edu.sibfu.isit.pluginz.framework.Model;
  */
 public class MasterController extends Controller {
     
-    public MasterController(String aTemplate, Model aModel) {
+    public MasterController(String aTemplate, MasterModel aModel) {
         super(aTemplate, aModel);
+    }
+
+    @Override
+    public ModelAndView handle(Request aRqst, Response aRspns) throws Exception {
+        return super.handle(aRqst, aRspns);
     }
     
 }

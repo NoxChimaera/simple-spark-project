@@ -1,0 +1,18 @@
+<#import "master.html" as layout />
+
+<@layout.master title="${title}" menuItems=menuItems>
+<br><br>
+<div class="row">
+    <#if images?size == 0>
+      <h1>Gallery is empty</h1>
+    <#else>
+      <#list images as image>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="${image.href}" alt="${image.alt}">
+          </div>
+        </div>
+      </#list>
+    </#if>
+</div>
+</@layout.master>

@@ -24,17 +24,11 @@
 package edu.sibfu.isit.pluginz;
 
 import edu.sibfu.isit.pluginz.configuration.Configuration;
-import edu.sibfu.isit.pluginz.configuration.Routing;
-import edu.sibfu.isit.pluginz.framework.Controller;
-import edu.sibfu.isit.pluginz.framework.Model;
-import edu.sibfu.isit.pluginz.http.HttpMethod;
-import edu.sibfu.isit.pluginz.modules.main.models.LinkMenuItem;
-import edu.sibfu.isit.pluginz.modules.main.models.MenuItem;
-import edu.sibfu.isit.pluginz.modules.main.models.MenuModel;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import edu.sibfu.isit.pluginz.modules.Modules;
+import edu.sibfu.isit.pluginz.modules.main.MainModule;
+import edu.sibfu.isit.pluginz.modules.main.gallery.GalleryModule;
+import edu.sibfu.isit.pluginz.modules.main.gallery.models.ImageItem;
+import edu.sibfu.isit.pluginz.modules.pages.PagesModule;
 import spark.template.freemarker.FreeMarkerEngine;
 
 /**
@@ -46,22 +40,34 @@ public class App {
     public static void main(String[] args) {
         Configuration.setTemplateEngine(new FreeMarkerEngine());
         
-        Model model = new Model<Map>() {
-            @Override
-            public Map<String, Object> get() {
-                Map<String, Object> map = new HashMap<>();
-                
-                List<MenuItem> items = new ArrayList<>();
-                items.add(new LinkMenuItem("annicom", "http://annimon.com"));
-                MenuModel menu = new MenuModel(items);
-                
-                map.put("title", "foobar");
-                map.put("menuItems", menu.get());
-                return map;
-            }
-        };
+        MainModule main = registerMain();
+        PagesModule pages = registerPages(main);
+        registerGallery(main, pages);
+    }
+    
+    private static MainModule registerMain() {
+        MainModule m = new MainModule();
+        Modules.register(MainModule.class, m);
+        return m;
+    }
+    
+    private static PagesModule registerPages(MainModule aMain) {
+        PagesModule m = new PagesModule(aMain);
+        Modules.register(PagesModule.class, m);
+        return m;
+    }
+    
+    private static GalleryModule registerGallery(MainModule aMain, PagesModule aPagesModule) {
+        GalleryModule m = new GalleryModule(aMain, aPagesModule);
+        Modules.register(GalleryModule.class, m);
         
-        Routing.route(HttpMethod.GET, "/", new Controller("index.html", model));
+        m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
+        m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
+        m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
+        m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
+        m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
+        
+        return m;
     }
     
 }

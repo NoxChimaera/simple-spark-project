@@ -21,24 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules;
+package edu.sibfu.isit.pluginz.modules.main.gallery.models;
 
-import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import edu.sibfu.isit.pluginz.framework.Model;
+import java.util.Map;
 
 /**
  *
  * @author Max Balushkin
  */
-public class ModulesTest {
+public class ImageItem extends Model<Map<String, Object>> {
     
-    @Test
-    public void testGet_String() {
-        MainModule main = new MainModule();
-        Modules.register(MainModule.class, main);
-        MainModule actual = Modules.get(main.getGuid());
-        assertEquals(main, actual);
+    private String href;
+    private String alt;
+    
+    public ImageItem(String aHref) {
+        href = aHref;
+        alt = "";
+    }
+    
+    public ImageItem(String aHref, String aAlt) {
+        href = aHref;
+        alt = aAlt;
+    }
+
+    @Override
+    public Map<String, Object> get() {
+        Map<String, Object> map = Model.map();
+        map.put("href", href);
+        map.put("alt", alt);
+        return map;
     }
     
 }

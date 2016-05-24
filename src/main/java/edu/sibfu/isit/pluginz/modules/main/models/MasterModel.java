@@ -21,24 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules;
+package edu.sibfu.isit.pluginz.modules.main.models;
 
-import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import edu.sibfu.isit.pluginz.framework.Model;
+import java.util.Map;
 
 /**
  *
  * @author Max Balushkin
  */
-public class ModulesTest {
+public class MasterModel extends Model<Map<String, Object>> {
+
+    private String title;
+    private MenuModel menu;
     
-    @Test
-    public void testGet_String() {
-        MainModule main = new MainModule();
-        Modules.register(MainModule.class, main);
-        MainModule actual = Modules.get(main.getGuid());
-        assertEquals(main, actual);
+    public MasterModel(String aTitle, MenuModel aMenu) {
+        title = aTitle;
+        menu = aMenu;
+    }
+    
+    @Override
+    public Map<String, Object> get() {
+        Map<String, Object> map = Model.map();
+        map.put("title", title);
+        map.put("menuItems", menu.get());
+        return map;
     }
     
 }

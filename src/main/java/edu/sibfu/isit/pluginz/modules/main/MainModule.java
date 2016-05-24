@@ -21,24 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules;
+package edu.sibfu.isit.pluginz.modules.main;
 
-import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import edu.sibfu.isit.pluginz.configuration.Routing;
+import edu.sibfu.isit.pluginz.framework.Controller;
+import edu.sibfu.isit.pluginz.http.HttpMethod;
+import edu.sibfu.isit.pluginz.modules.Module;
+import edu.sibfu.isit.pluginz.modules.main.models.MasterModel;
+import edu.sibfu.isit.pluginz.modules.main.models.MenuModel;
+import java.util.ArrayList;
 
 /**
  *
  * @author Max Balushkin
  */
-public class ModulesTest {
+public class MainModule extends Module {
+   
+    private MenuModel menu;
     
-    @Test
-    public void testGet_String() {
-        MainModule main = new MainModule();
-        Modules.register(MainModule.class, main);
-        MainModule actual = Modules.get(main.getGuid());
-        assertEquals(main, actual);
+    private MasterModel master;
+    
+    public MainModule() {
+        super("main");
+        menu = new MenuModel(new ArrayList<>());
+        master = new MasterModel("Index", menu);
+        Routing.route(HttpMethod.GET, "/", new Controller("index.html", master));
     }
     
+    public MenuModel getMenu() {
+        return menu;
+    }
+    
+    public MasterModel getMaster() {
+        return master;
+    }
+   
 }

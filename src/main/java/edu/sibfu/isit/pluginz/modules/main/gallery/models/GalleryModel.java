@@ -21,24 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules;
+package edu.sibfu.isit.pluginz.modules.main.gallery.models;
 
-import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import edu.sibfu.isit.pluginz.framework.Model;
+import edu.sibfu.isit.pluginz.modules.main.models.MasterModel;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Max Balushkin
  */
-public class ModulesTest {
+public class GalleryModel extends Model<Map<String, Object>> {
     
-    @Test
-    public void testGet_String() {
-        MainModule main = new MainModule();
-        Modules.register(MainModule.class, main);
-        MainModule actual = Modules.get(main.getGuid());
-        assertEquals(main, actual);
+    private MasterModel master;
+    private List<ImageItem> imgs;
+    
+    public GalleryModel(MasterModel aMaster) {
+        this(aMaster, new ArrayList<>());
     }
     
+    public GalleryModel(MasterModel aMaster, List<ImageItem> aImgs) {
+        master = aMaster;
+        imgs = aImgs;
+    }
+    
+    public void addImage(ImageItem aImg) {
+        imgs.add(aImg);
+    }
+
+    @Override
+    public Map<String, Object> get() {
+        Map<String, Object> map = master.get();
+        Object[] images = imgs.stream().map((item) -> item.get()).toArray();
+        map.put("images", images);
+        return map;
+    }
+
 }

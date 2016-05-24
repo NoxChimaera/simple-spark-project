@@ -21,24 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules;
+package edu.sibfu.isit.pluginz.modules.pages;
 
+import edu.sibfu.isit.pluginz.modules.Module;
 import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import edu.sibfu.isit.pluginz.modules.main.models.DropdownMenuItem;
+import edu.sibfu.isit.pluginz.modules.main.models.MenuItem;
 
 /**
  *
  * @author Max Balushkin
  */
-public class ModulesTest {
+public class PagesModule extends Module {
     
-    @Test
-    public void testGet_String() {
-        MainModule main = new MainModule();
-        Modules.register(MainModule.class, main);
-        MainModule actual = Modules.get(main.getGuid());
-        assertEquals(main, actual);
+    private DropdownMenuItem dropdown;
+    
+    public PagesModule(MainModule aMain) {
+        super("pages");
+        dropdown = new DropdownMenuItem("Pages");
+        aMain.getMenu().add(dropdown);
+    }
+    
+    public void addMenuItem(MenuItem aItem) {
+        dropdown.add(aItem);
     }
     
 }

@@ -21,24 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules;
+package edu.sibfu.isit.pluginz.modules.main.gallery;
 
+import edu.sibfu.isit.pluginz.configuration.Routing;
+import edu.sibfu.isit.pluginz.framework.Controller;
+import edu.sibfu.isit.pluginz.http.HttpMethod;
+import edu.sibfu.isit.pluginz.modules.Module;
 import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import edu.sibfu.isit.pluginz.modules.main.gallery.models.GalleryModel;
+import edu.sibfu.isit.pluginz.modules.main.gallery.models.ImageItem;
+import edu.sibfu.isit.pluginz.modules.main.models.LinkMenuItem;
+import edu.sibfu.isit.pluginz.modules.pages.PagesModule;
 
 /**
  *
  * @author Max Balushkin
  */
-public class ModulesTest {
+public class GalleryModule extends Module {
     
-    @Test
-    public void testGet_String() {
-        MainModule main = new MainModule();
-        Modules.register(MainModule.class, main);
-        MainModule actual = Modules.get(main.getGuid());
-        assertEquals(main, actual);
+    private GalleryModel model;
+    
+    public GalleryModule(MainModule aMain, PagesModule aPages) {
+        super("gallery");
+        
+        model = new GalleryModel(aMain.getMaster());
+        
+        aPages.addMenuItem(new LinkMenuItem("Gallery", getGuid()));
+        
+        Routing.route(HttpMethod.GET, "/gallery", new Controller("gallery.html", model));
+    }
+    
+    public void addImage(ImageItem aImg) {
+        model.addImage(aImg);
     }
     
 }

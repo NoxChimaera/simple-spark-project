@@ -38,6 +38,10 @@ public class MenuModel extends Model<Object[]> {
         items = aItems;
     }
     
+    public void add(MenuItem aItem) {
+        items.add(aItem);
+    }
+    
     @Override
     public Object[] get() {
         return items.stream().map((item) -> item.get()).toArray();

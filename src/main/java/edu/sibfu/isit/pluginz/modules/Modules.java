@@ -35,7 +35,7 @@ public class Modules {
     
     private static final Map<Class, Module> modules = new HashMap<>();
     
-    public static <T extends Module> void register(Class<T> aClass, @NotNull Module aModule) {
+    public static <T extends Module> void register(Class<T> aClass, @NotNull T aModule) {
         modules.put(aClass, aModule);
     }
     

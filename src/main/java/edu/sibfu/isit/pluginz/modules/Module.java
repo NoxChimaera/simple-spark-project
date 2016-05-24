@@ -35,7 +35,7 @@ public abstract class Module {
         guid = aGuid;
     }
     
-    public String getGuid() {
+    public final String getGuid() {
         return guid;
     }
     

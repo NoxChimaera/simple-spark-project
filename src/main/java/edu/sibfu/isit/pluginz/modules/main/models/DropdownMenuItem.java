@@ -21,20 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules.main;
+package edu.sibfu.isit.pluginz.modules.main.models;
 
-import edu.sibfu.isit.pluginz.modules.Module;
+import com.sun.istack.internal.NotNull;
+import edu.sibfu.isit.pluginz.framework.Model;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author Max Balushkin
  */
-public class Main extends Module {
-   
+public class DropdownMenuItem extends MenuItem {
+
+    private String name;
+    private List<MenuItem> items;
     
-    
-    public Main() {
-        super("main");
+    public DropdownMenuItem(String aName) {
+        super(Type.Dropdown);
+        name = aName;
+        items = new ArrayList<>();
     }
-   
+    
+    public DropdownMenuItem(String aName, @NotNull List<MenuItem> aItems) {
+        super(Type.Dropdown);
+        name = aName;
+        items = aItems;
+    }
+    
+    public void add(MenuItem aItem) {
+        items.add(aItem);
+    }
+
+    @Override
+    public Map<String, Object> get() {
+        Map<String, Object> map = Model.map();
+        map.put("type", getType().toString().toLowerCase());
+        map.put("name", name);
+        map.put("items", items.stream().map((item) -> item.get()).toArray());
+        return map;
+    }
+    
 }
