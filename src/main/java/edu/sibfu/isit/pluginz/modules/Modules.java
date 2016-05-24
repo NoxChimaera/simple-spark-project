@@ -28,21 +28,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Provides modules.
+ * 
  * @author Max Balushkin
  */
 public class Modules {
     
     private static final Map<Class, Module> modules = new HashMap<>();
     
+    /**
+     * Registers module.
+     * 
+     * @param <T>
+     * @param aClass module type
+     * @param aModule module
+     */
     public static <T extends Module> void register(Class<T> aClass, @NotNull T aModule) {
         modules.put(aClass, aModule);
     }
     
+    /**
+     * Returns module by type.
+     * 
+     * @param <T>
+     * @param aClass module type
+     * @return module if contained in provider, else null
+     */
     public static <T extends Module> T get(Class<T> aClass) {
         return aClass.cast(modules.get(aClass));
     }
     
+    /**
+     * Returns module by GUID.
+     * 
+     * @param <T>
+     * @param aGuid module GUID
+     * @return module if contained in provider, else null
+     */
     public static <T extends Module> T get(String aGuid) {
         for (Map.Entry<Class, Module> entry : modules.entrySet()) {
             Class<T> key = entry.getKey();

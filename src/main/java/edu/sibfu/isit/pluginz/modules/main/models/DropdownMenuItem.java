@@ -30,26 +30,43 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Represents dropdown menu.
+ * 
  * @author Max Balushkin
  */
 public class DropdownMenuItem extends MenuItem {
 
     private String name;
     private List<MenuItem> items;
-    
+   
+    /**
+     * Creates new dropdown.
+     * 
+     * @param aName name
+     */
     public DropdownMenuItem(String aName) {
         super(Type.Dropdown);
         name = aName;
         items = new ArrayList<>();
     }
     
+    /**
+     * Creates new dropdown with specified list of items.
+     * 
+     * @param aName name
+     * @param aItems items
+     */
     public DropdownMenuItem(String aName, @NotNull List<MenuItem> aItems) {
         super(Type.Dropdown);
         name = aName;
         items = aItems;
     }
     
+    /**
+     * Adds item to dropdown.
+     * 
+     * @param aItem item
+     */
     public void add(MenuItem aItem) {
         items.add(aItem);
     }

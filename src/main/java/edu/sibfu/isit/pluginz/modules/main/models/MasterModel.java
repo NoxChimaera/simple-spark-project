@@ -27,7 +27,8 @@ import edu.sibfu.isit.pluginz.framework.Model;
 import java.util.Map;
 
 /**
- *
+ * Represents master template model.
+ * 
  * @author Max Balushkin
  */
 public class MasterModel extends Model<Map<String, Object>> {
@@ -35,6 +36,12 @@ public class MasterModel extends Model<Map<String, Object>> {
     private String title;
     private MenuModel menu;
     
+    /**
+     * Creates new master model.
+     * 
+     * @param aTitle page title
+     * @param aMenu application menu
+     */
     public MasterModel(String aTitle, MenuModel aMenu) {
         title = aTitle;
         menu = aMenu;

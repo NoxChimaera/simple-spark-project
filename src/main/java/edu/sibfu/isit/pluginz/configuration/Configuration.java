@@ -23,21 +23,34 @@
  */
 package edu.sibfu.isit.pluginz.configuration;
 
+import com.sun.istack.internal.NotNull;
 import spark.TemplateEngine;
 import spark.template.freemarker.FreeMarkerEngine;
 
 /**
- *
+ * Application configuration.
+ * 
  * @author Max Balushkin
  */
 public class Configuration {
     
     private static TemplateEngine templateEngine = new FreeMarkerEngine();
     
+    /**
+     * Sets template engine.
+     * Default: FreeMarker
+     * 
+     * @param aEngine template engine
+     */
     public static void setTemplateEngine(TemplateEngine aEngine) {
         templateEngine = aEngine;
     }
     
+    /**
+     * Returns template engine.
+     * 
+     * @return template engine
+     */
     public static TemplateEngine getTemplateEngine() {
         return templateEngine;
     }

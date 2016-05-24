@@ -27,22 +27,42 @@ import edu.sibfu.isit.pluginz.framework.Model;
 import java.util.Map;
 
 /**
- *
+ * Base class for menu items.
+ * 
  * @author Max Balushkin
  */
 public abstract class MenuItem extends Model<Map<String, Object>> {
 
+    /**
+     * Item type.
+     */
     public enum Type {
+        /**
+         * Simple link.
+         */
         Link,
+        /**
+         * Dropdown menu.
+         */
         Dropdown
     }
     
     private Type type;
     
+    /**
+     * Creates new menu item.
+     * 
+     * @param aType item type
+     */
     public MenuItem(Type aType) {
         type = aType;
     }
     
+    /**
+     * Returns item type.
+     * 
+     * @return type
+     */
     public Type getType() {
         return type;
     }

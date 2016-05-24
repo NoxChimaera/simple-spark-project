@@ -24,19 +24,30 @@
 package edu.sibfu.isit.pluginz.modules;
 
 /**
- *
+ * Base class for Pluginz module.
+ * 
  * @author Max Balushkin
  */
 public abstract class Module {
     
     private final String guid;
     
+    /**
+     * Creates new module with specified GUID.
+     * 
+     * @param aGuid GUID
+     */
     public Module(String aGuid) {
         guid = aGuid;
     }
     
+    /**
+     * Returns module GUID.
+     * 
+     * @return GUID
+     */
     public final String getGuid() {
         return guid;
     }
-    
+
 }

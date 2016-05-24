@@ -27,12 +27,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Represents model.
+ * 
  * @author Max Balushkin
- * @param <T>
+ * @param <T> type of model value
  */
 public abstract class Model<T> {
 
+    /**
+     * Creates empty hash-model.
+     * 
+     * @return empty model
+     */
     public static Model empty() {
         return new Model() {
             @Override
@@ -42,10 +48,20 @@ public abstract class Model<T> {
         };
     }
     
+    /**
+     * Creates empty hash-map.
+     * 
+     * @return hash-map
+     */
     public static Map<String, Object> map() {
         return new HashMap<>();
     }
     
+    /**
+     * Returns model.
+     * 
+     * @return model
+     */
     public abstract T get();
     
 }

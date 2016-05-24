@@ -29,11 +29,19 @@ import spark.Spark;
 import spark.TemplateEngine;
 
 /**
- *
+ * Routing configuration.
+ * 
  * @author Max Balushkin
  */
 public class Routing {
     
+    /**
+     * Registers new route.
+     * 
+     * @param aMethod HTTP method, {@link HttpMethod}
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void route(HttpMethod aMethod, String aPath, Controller aCtrl) {
         switch (aMethod) {  
             case OPTIONS:
@@ -68,46 +76,100 @@ public class Routing {
         }
     }
     
+    /**
+     * Registers new OPTIONS route.
+     * 
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void options(String aPath, Controller aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.options(aPath, aCtrl, engine);
     }
     
+    /**
+     * Registers new GET route.
+     * 
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void get(String aPath, Controller aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.get(aPath, aCtrl, engine);
     }
-    
+        
+    /**
+     * Registers new HEAD route.
+     * 
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void head(String aPath, Controller aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.head(aPath, aCtrl, engine);
     }
-    
+        
+    /**
+     * Registers new POST route.
+     * 
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void post(String aPath, Controller aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.post(aPath, aCtrl, engine);
     }
-    
+        
+    /**
+     * Registers new PUT route.
+     * 
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void put(String aPath, Controller aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.put(aPath, aCtrl, engine);
     }
-    
+       
+    /**
+     * Registers new PATCH route.
+     * 
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void patch(String aPath, Controller aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.patch(aPath, aCtrl, engine);
     }
-    
+        
+    /**
+     * Registers new DELETE route.
+     * 
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void delete(String aPath, Controller aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.delete(aPath, aCtrl, engine);
     }
-    
+        
+    /**
+     * Registers new TRACE route.
+     * 
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void trace(String aPath, Controller aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.trace(aPath, aCtrl, engine);
     }
-    
+        
+    /**
+     * Registers new CONNECT route.
+     * 
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void connect(String aPath, Controller aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.connect(aPath, aCtrl, engine);

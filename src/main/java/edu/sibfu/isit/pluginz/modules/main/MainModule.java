@@ -32,7 +32,10 @@ import edu.sibfu.isit.pluginz.modules.main.models.MenuModel;
 import java.util.ArrayList;
 
 /**
- *
+ * Main module.
+ * Routes:
+ *  "/"
+ * 
  * @author Max Balushkin
  */
 public class MainModule extends Module {
@@ -41,6 +44,9 @@ public class MainModule extends Module {
     
     private MasterModel master;
     
+    /**
+     * Creates main module.
+     */
     public MainModule() {
         super("main");
         menu = new MenuModel(new ArrayList<>());
@@ -48,10 +54,20 @@ public class MainModule extends Module {
         Routing.route(HttpMethod.GET, "/", new Controller("index.html", master));
     }
     
+    /**
+     * Returns application menu.
+     * 
+     * @return menu
+     */
     public MenuModel getMenu() {
         return menu;
     }
     
+    /**
+     * Returns master model (contains page title and menu).
+     * 
+     * @return master model
+     */
     public MasterModel getMaster() {
         return master;
     }

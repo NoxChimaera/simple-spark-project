@@ -24,7 +24,8 @@
 package edu.sibfu.isit.pluginz.http;
 
 /**
- *
+ * HTTP Methods.
+ * 
  * @author Max Balushkin
  */
 public enum HttpMethod {

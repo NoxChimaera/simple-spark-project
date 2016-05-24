@@ -21,26 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules.main.gallery;
+package edu.sibfu.isit.pluginz.modules.gallery;
 
 import edu.sibfu.isit.pluginz.configuration.Routing;
 import edu.sibfu.isit.pluginz.framework.Controller;
 import edu.sibfu.isit.pluginz.http.HttpMethod;
 import edu.sibfu.isit.pluginz.modules.Module;
 import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import edu.sibfu.isit.pluginz.modules.main.gallery.models.GalleryModel;
-import edu.sibfu.isit.pluginz.modules.main.gallery.models.ImageItem;
+import edu.sibfu.isit.pluginz.modules.gallery.models.GalleryModel;
+import edu.sibfu.isit.pluginz.modules.gallery.models.ImageItem;
 import edu.sibfu.isit.pluginz.modules.main.models.LinkMenuItem;
 import edu.sibfu.isit.pluginz.modules.pages.PagesModule;
 
 /**
- *
+ * Gallery module.
+ * Routes:
+ *  "/gallery"
+ * 
  * @author Max Balushkin
  */
 public class GalleryModule extends Module {
     
     private GalleryModel model;
     
+    /**
+     * Creates gallery module.
+     * 
+     * @param aMain main module, {@link MainModule}
+     * @param aPages pages module, {@link PagesModule}
+     */
     public GalleryModule(MainModule aMain, PagesModule aPages) {
         super("gallery");
         
@@ -51,6 +60,11 @@ public class GalleryModule extends Module {
         Routing.route(HttpMethod.GET, "/gallery", new Controller("gallery.html", model));
     }
     
+    /**
+     * Adds image to gallery.
+     * 
+     * @param aImg image
+     */
     public void addImage(ImageItem aImg) {
         model.addImage(aImg);
     }

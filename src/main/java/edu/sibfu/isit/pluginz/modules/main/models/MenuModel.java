@@ -24,20 +24,39 @@
 package edu.sibfu.isit.pluginz.modules.main.models;
 
 import edu.sibfu.isit.pluginz.framework.Model;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Represents application menu.
+ * 
  * @author Max Balushkin
  */
 public class MenuModel extends Model<Object[]> {
 
-    List<MenuItem> items;
+    private List<MenuItem> items;
 
+    /**
+     * Creates new menu.
+     */
+    public MenuModel() {
+        this(new ArrayList<>());
+    }
+    
+    /**
+     * Creates new menu with specified list of items.
+     * 
+     * @param aItems items
+     */
     public MenuModel(List<MenuItem> aItems) {
         items = aItems;
     }
     
+    /**
+     * Adds item to application menu.
+     * 
+     * @param aItem menu item
+     */
     public void add(MenuItem aItem) {
         items.add(aItem);
     }

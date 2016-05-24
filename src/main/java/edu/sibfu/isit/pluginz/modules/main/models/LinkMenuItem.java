@@ -27,7 +27,8 @@ import edu.sibfu.isit.pluginz.framework.Model;
 import java.util.Map;
 
 /**
- *
+ * Represents hyperlink menu item.
+ * 
  * @author Max Balushkin
  */
 public class LinkMenuItem extends MenuItem {
@@ -35,6 +36,12 @@ public class LinkMenuItem extends MenuItem {
     private String name;
     private String href;
     
+    /**
+     * Creates new hyperlink item.
+     * 
+     * @param aName hyperlink name
+     * @param aHref destination
+     */
     public LinkMenuItem(String aName, String aHref) {
         super(Type.Link);
         name = aName;

@@ -21,27 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules.main.controllers;
+package edu.sibfu.isit.pluginz.modules.gallery.models;
 
-import edu.sibfu.isit.pluginz.framework.Controller;
-import edu.sibfu.isit.pluginz.modules.main.models.MasterModel;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
+import edu.sibfu.isit.pluginz.framework.Model;
+import java.util.Map;
 
 /**
- *
+ * Represents image.
+ * 
  * @author Max Balushkin
  */
-public class MasterController extends Controller {
+public class ImageItem extends Model<Map<String, Object>> {
     
-    public MasterController(String aTemplate, MasterModel aModel) {
-        super(aTemplate, aModel);
+    private String href;
+    private String alt;
+    
+    /**
+     * Creates new image with empty alternate text.
+     * 
+     * @param aHref link to image
+     */
+    public ImageItem(String aHref) {
+        href = aHref;
+        alt = "";
+    }
+    
+    /**
+     * Creates new image.
+     * 
+     * @param aHref link to image
+     * @param aAlt alternate text
+     */
+    public ImageItem(String aHref, String aAlt) {
+        href = aHref;
+        alt = aAlt;
     }
 
     @Override
-    public ModelAndView handle(Request aRqst, Response aRspns) throws Exception {
-        return super.handle(aRqst, aRspns);
+    public Map<String, Object> get() {
+        Map<String, Object> map = Model.map();
+        map.put("href", href);
+        map.put("alt", alt);
+        return map;
     }
     
 }

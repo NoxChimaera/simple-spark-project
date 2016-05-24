@@ -26,17 +26,23 @@ package edu.sibfu.isit.pluginz;
 import edu.sibfu.isit.pluginz.configuration.Configuration;
 import edu.sibfu.isit.pluginz.modules.Modules;
 import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import edu.sibfu.isit.pluginz.modules.main.gallery.GalleryModule;
-import edu.sibfu.isit.pluginz.modules.main.gallery.models.ImageItem;
+import edu.sibfu.isit.pluginz.modules.gallery.GalleryModule;
+import edu.sibfu.isit.pluginz.modules.gallery.models.ImageItem;
 import edu.sibfu.isit.pluginz.modules.pages.PagesModule;
 import spark.template.freemarker.FreeMarkerEngine;
 
 /**
- *
+ * Entry point.
+ * 
  * @author Max Balushkin
  */
 public class App {
     
+    /**
+     * Entry point.
+     * 
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         Configuration.setTemplateEngine(new FreeMarkerEngine());
         
@@ -45,18 +51,36 @@ public class App {
         registerGallery(main, pages);
     }
     
+    /**
+     * Registers main module.
+     * 
+     * @return main module
+     */
     private static MainModule registerMain() {
         MainModule m = new MainModule();
         Modules.register(MainModule.class, m);
         return m;
     }
     
+    /**
+     * Registers pages module.
+     * 
+     * @param aMain main module
+     * @return pages module
+     */
     private static PagesModule registerPages(MainModule aMain) {
         PagesModule m = new PagesModule(aMain);
         Modules.register(PagesModule.class, m);
         return m;
     }
     
+    /**
+     * Registers gallery module.
+     * 
+     * @param aMain main module
+     * @param aPagesModule pages module
+     * @return gallery module
+     */
     private static GalleryModule registerGallery(MainModule aMain, PagesModule aPagesModule) {
         GalleryModule m = new GalleryModule(aMain, aPagesModule);
         Modules.register(GalleryModule.class, m);

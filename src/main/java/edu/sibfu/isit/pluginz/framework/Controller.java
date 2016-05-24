@@ -29,7 +29,8 @@ import spark.Response;
 import spark.TemplateViewRoute;
 
 /**
- *
+ * Route controller.
+ * 
  * @author Max Balushkin
  */
 public class Controller implements TemplateViewRoute {
@@ -37,24 +38,50 @@ public class Controller implements TemplateViewRoute {
     private final String template;
     private Model model;
     
+    /**
+     * Creates new route controller.
+     * 
+     * @param aTemplate view
+     */
     public Controller(String aTemplate) {
         template = aTemplate;
         model = Model.empty();
     }
     
+    /**
+     * Creates new route controller and binds it with model.
+     * 
+     * @param aTemplate view
+     * @param aModel model
+     */
     public Controller(String aTemplate, Model aModel) {
         template = aTemplate;
         model = aModel;
     }
     
+    /**
+     * Returns template name.
+     * 
+     * @return template name
+     */
     public String getTemplate() {
         return template;
     }
     
+    /**
+     * Sets model.
+     * 
+     * @param aModel model
+     */
     public void setModel(Model aModel) {
         model = aModel;
     }
     
+    /**
+     * Returns model.
+     * 
+     * @return model
+     */
     public Model getModel() {
         return model;
     }

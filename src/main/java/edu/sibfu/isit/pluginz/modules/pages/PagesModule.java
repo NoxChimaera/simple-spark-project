@@ -29,19 +29,30 @@ import edu.sibfu.isit.pluginz.modules.main.models.DropdownMenuItem;
 import edu.sibfu.isit.pluginz.modules.main.models.MenuItem;
 
 /**
- *
+ * Pages module.
+ * 
  * @author Max Balushkin
  */
 public class PagesModule extends Module {
     
     private DropdownMenuItem dropdown;
     
+    /**
+     * Creates pages module.
+     * 
+     * @param aMain main module
+     */
     public PagesModule(MainModule aMain) {
         super("pages");
         dropdown = new DropdownMenuItem("Pages");
         aMain.getMenu().add(dropdown);
     }
     
+    /**
+     * Adds item to pages menu.
+     * 
+     * @param aItem item
+     */
     public void addMenuItem(MenuItem aItem) {
         dropdown.add(aItem);
     }
