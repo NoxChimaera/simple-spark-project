@@ -23,7 +23,6 @@
  */
 package edu.sibfu.isit.pluginz.modules;
 
-import com.sun.istack.internal.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,7 +42,7 @@ public class Modules {
      * @param aClass module type
      * @param aModule module
      */
-    public static <T extends Module> void register(Class<T> aClass, @NotNull T aModule) {
+    public static <T extends Module> void register(Class<T> aClass, T aModule) {
         modules.put(aClass, aModule);
     }
     

@@ -23,7 +23,6 @@
  */
 package edu.sibfu.isit.pluginz.modules.main.models;
 
-import com.sun.istack.internal.NotNull;
 import edu.sibfu.isit.pluginz.framework.Model;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +55,7 @@ public class DropdownMenuItem extends MenuItem {
      * @param aName name
      * @param aItems items
      */
-    public DropdownMenuItem(String aName, @NotNull List<MenuItem> aItems) {
+    public DropdownMenuItem(String aName, List<MenuItem> aItems) {
         super(Type.Dropdown);
         name = aName;
         items = aItems;

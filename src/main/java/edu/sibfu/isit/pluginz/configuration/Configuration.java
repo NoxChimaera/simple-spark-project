@@ -23,7 +23,6 @@
  */
 package edu.sibfu.isit.pluginz.configuration;
 
-import com.sun.istack.internal.NotNull;
 import spark.TemplateEngine;
 import spark.template.freemarker.FreeMarkerEngine;
 
