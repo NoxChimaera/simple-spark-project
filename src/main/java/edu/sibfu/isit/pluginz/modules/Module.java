@@ -23,6 +23,10 @@
  */
 package edu.sibfu.isit.pluginz.modules;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Base class for Pluginz module.
  * 
@@ -31,6 +35,9 @@ package edu.sibfu.isit.pluginz.modules;
 public abstract class Module {
     
     private final String guid;
+    private final List<String> dependencies;
+    
+    private boolean isInitialized;
     
     /**
      * Creates new module with specified GUID.
@@ -38,7 +45,32 @@ public abstract class Module {
      * @param aGuid GUID
      */
     public Module(String aGuid) {
+        this(aGuid, new String[] { });
+    }
+    
+    /**
+     * Creates new module with specified GUID.
+     * 
+     * @param aGuid GUID
+     * @param aDependencies list of module dependencies
+     */
+    public Module(String aGuid, String ... aDependencies) {
         guid = aGuid;
+        dependencies = Arrays.asList(aDependencies);
+        isInitialized = false;
+    }
+    
+    public void init() {
+        List<String> lost = new ArrayList<>();
+        for (String dependency : dependencies) {
+            if (!Modules.has(dependency)) {
+                lost.add(dependency);
+            }
+        }
+        if (!lost.isEmpty()) {
+            throw new LostDependencies(lost);
+        }
+        isInitialized = true;
     }
     
     /**
@@ -49,5 +81,15 @@ public abstract class Module {
     public final String getGuid() {
         return guid;
     }
+    
+    public final List<String> getDependencies() {
+        return dependencies;
+    }
+    
+    public boolean isInitialized() {
+        return isInitialized;
+    }
+    
+    public abstract void uninit();
 
 }

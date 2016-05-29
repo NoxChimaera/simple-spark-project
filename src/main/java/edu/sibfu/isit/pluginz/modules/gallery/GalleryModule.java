@@ -25,8 +25,10 @@ package edu.sibfu.isit.pluginz.modules.gallery;
 
 import edu.sibfu.isit.pluginz.configuration.Routing;
 import edu.sibfu.isit.pluginz.framework.Controller;
+import edu.sibfu.isit.pluginz.framework.Halt;
 import edu.sibfu.isit.pluginz.http.HttpMethod;
 import edu.sibfu.isit.pluginz.modules.Module;
+import edu.sibfu.isit.pluginz.modules.Modules;
 import edu.sibfu.isit.pluginz.modules.main.MainModule;
 import edu.sibfu.isit.pluginz.modules.gallery.models.GalleryModel;
 import edu.sibfu.isit.pluginz.modules.gallery.models.ImageItem;
@@ -44,21 +46,30 @@ public class GalleryModule extends Module {
     
     private GalleryModel model;
     
+    private PagesModule pages;
+    private LinkMenuItem link;
+    
     /**
      * Creates gallery module.
-     * 
-     * @param aMain main module, {@link MainModule}
-     * @param aPages pages module, {@link PagesModule}
      */
-    public GalleryModule(MainModule aMain, PagesModule aPages) {
-        super("gallery");
+    public GalleryModule() {
+        super("gallery", "main", "pages");
+    }
+
+    @Override
+    public void init() {
+        super.init();
+        MainModule main = Modules.get(MainModule.class);
+        pages = Modules.get(PagesModule.class);
         
-        model = new GalleryModel(aMain.getMaster());
+        model = new GalleryModel(main.getMaster());
         
-        aPages.addMenuItem(new LinkMenuItem("Gallery", getGuid()));
+        link = new LinkMenuItem("Gallery", getGuid());
+        pages.addMenuItem(link);
         
         Routing.route(HttpMethod.GET, "/gallery", new Controller("gallery.html", model));
     }
+    
     
     /**
      * Adds image to gallery.
@@ -67,6 +78,12 @@ public class GalleryModule extends Module {
      */
     public void addImage(ImageItem aImg) {
         model.addImage(aImg);
+    }
+
+    @Override
+    public void uninit() {
+        pages.removeMenuItem(link);
+        Routing.route(HttpMethod.GET, "/gallery", Halt.NOT_FOUND);
     }
     
 }

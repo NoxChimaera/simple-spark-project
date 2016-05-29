@@ -36,7 +36,7 @@ public class ModulesTest {
     @Test
     public void testGet_String() {
         MainModule main = new MainModule();
-        Modules.register(MainModule.class, main);
+        Modules.set(MainModule.class, main);
         MainModule actual = Modules.get(main.getGuid());
         assertEquals(main, actual);
     }

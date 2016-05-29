@@ -21,55 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules.pages;
+package edu.sibfu.isit.pluginz.framework;
 
-import edu.sibfu.isit.pluginz.modules.Module;
-import edu.sibfu.isit.pluginz.modules.Modules;
-import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import edu.sibfu.isit.pluginz.modules.main.models.DropdownMenuItem;
-import edu.sibfu.isit.pluginz.modules.main.models.MenuItem;
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
+import spark.Spark;
 
 /**
- * Pages module.
- * 
+ *
  * @author Max Balushkin
  */
-public class PagesModule extends Module {
+public class Halt extends Controller {
     
-    private DropdownMenuItem dropdown;
-    private MainModule main;
+    public static final Halt NOT_FOUND = new Halt(404);
     
-    /**
-     * Creates pages module.
-     */
-    public PagesModule() {
-        super("pages", "main");
+    private final int code;
+    
+    public Halt(int aCode) {
+        super("");
+        code = aCode;
     }
 
     @Override
-    public void init() {
-        super.init();
-        main = Modules.get(MainModule.class);
-        dropdown = new DropdownMenuItem("Pages");
-        main.getMenu().add(dropdown);
-    }
-    
-    /**
-     * Adds item to pages menu.
-     * 
-     * @param aItem item
-     */
-    public void addMenuItem(MenuItem aItem) {
-        dropdown.add(aItem);
-    }
-    
-    public void removeMenuItem(MenuItem aItem) {
-        dropdown.remove(aItem);
-    }
-
-    @Override
-    public void uninit() {
-        main.getMenu().remove(dropdown);
+    public ModelAndView handle(Request aRqst, Response aRspns) throws Exception {
+        Spark.halt(code);
+        return new ModelAndView("", "");
     }
     
 }

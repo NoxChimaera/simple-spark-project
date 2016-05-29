@@ -46,9 +46,9 @@ public class App {
     public static void main(String[] args) {
         Configuration.setTemplateEngine(new FreeMarkerEngine());
         
-        MainModule main = registerMain();
-        PagesModule pages = registerPages(main);
-        registerGallery(main, pages);
+        registerMain();
+        registerPages();
+        registerGallery();
     }
     
     /**
@@ -58,32 +58,28 @@ public class App {
      */
     private static MainModule registerMain() {
         MainModule m = new MainModule();
-        Modules.register(MainModule.class, m);
+        Modules.set(m);
+        m.init();
         return m;
     }
     
     /**
      * Registers pages module.
-     * 
-     * @param aMain main module
-     * @return pages module
      */
-    private static PagesModule registerPages(MainModule aMain) {
-        PagesModule m = new PagesModule(aMain);
-        Modules.register(PagesModule.class, m);
+    private static PagesModule registerPages() {
+        PagesModule m = new PagesModule();
+        Modules.set(m);
+        m.init();
         return m;
     }
     
     /**
      * Registers gallery module.
-     * 
-     * @param aMain main module
-     * @param aPagesModule pages module
-     * @return gallery module
      */
-    private static GalleryModule registerGallery(MainModule aMain, PagesModule aPagesModule) {
-        GalleryModule m = new GalleryModule(aMain, aPagesModule);
-        Modules.register(GalleryModule.class, m);
+    private static GalleryModule registerGallery() {
+        GalleryModule m = new GalleryModule();
+        Modules.set(m);
+        m.init();
         
         m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
         m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));

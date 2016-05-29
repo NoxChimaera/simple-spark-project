@@ -69,6 +69,10 @@ public class DropdownMenuItem extends MenuItem {
     public void add(MenuItem aItem) {
         items.add(aItem);
     }
+    
+    public void remove(MenuItem aItem) {
+        items.remove(aItem);
+    }
 
     @Override
     public Map<String, Object> get() {

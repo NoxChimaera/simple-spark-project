@@ -24,6 +24,7 @@
 package edu.sibfu.isit.pluginz.modules;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,8 +43,19 @@ public class Modules {
      * @param aClass module type
      * @param aModule module
      */
-    public static <T extends Module> void register(Class<T> aClass, T aModule) {
+    public static <T extends Module> void set(Class<T> aClass, T aModule) {
         modules.put(aClass, aModule);
+    }
+    
+    public static void set(Module aModule) {
+        modules.put(aModule.getClass(), aModule);
+    }
+    
+    public static <T extends Module> void unset(Class<T> aClass) {
+        Module m = modules.get(aClass);
+        if (m == null) return;
+        m.uninit();
+        modules.remove(aClass);
     }
     
     /**
@@ -73,6 +85,11 @@ public class Modules {
             }
         }
         return null;
+    }
+    
+    public static <T extends Module> boolean has(String aGuid) {
+        Module m = get(aGuid);
+        return m != null;
     }
     
 }

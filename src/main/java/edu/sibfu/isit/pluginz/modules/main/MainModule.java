@@ -49,6 +49,10 @@ public class MainModule extends Module {
      */
     public MainModule() {
         super("main");
+    }
+
+    @Override
+    public void init() {
         menu = new MenuModel(new ArrayList<>());
         master = new MasterModel("Index", menu);
         Routing.route(HttpMethod.GET, "/", new Controller("index.html", master));
@@ -71,5 +75,8 @@ public class MainModule extends Module {
     public MasterModel getMaster() {
         return master;
     }
+
+    @Override
+    public void uninit() { }
    
 }

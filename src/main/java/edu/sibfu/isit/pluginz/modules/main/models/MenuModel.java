@@ -61,6 +61,10 @@ public class MenuModel extends Model<Object[]> {
         items.add(aItem);
     }
     
+    public void remove(MenuItem aItem) {
+        items.remove(aItem);
+    }
+    
     @Override
     public Object[] get() {
         return items.stream().map((item) -> item.get()).toArray();

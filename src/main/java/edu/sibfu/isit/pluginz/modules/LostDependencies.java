@@ -21,55 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules.pages;
+package edu.sibfu.isit.pluginz.modules;
 
-import edu.sibfu.isit.pluginz.modules.Module;
-import edu.sibfu.isit.pluginz.modules.Modules;
-import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import edu.sibfu.isit.pluginz.modules.main.models.DropdownMenuItem;
-import edu.sibfu.isit.pluginz.modules.main.models.MenuItem;
+import java.util.List;
 
 /**
- * Pages module.
- * 
+ *
  * @author Max Balushkin
  */
-public class PagesModule extends Module {
+public class LostDependencies extends RuntimeException {
     
-    private DropdownMenuItem dropdown;
-    private MainModule main;
+    private final List<String> dependencies;
     
-    /**
-     * Creates pages module.
-     */
-    public PagesModule() {
-        super("pages", "main");
-    }
-
-    @Override
-    public void init() {
-        super.init();
-        main = Modules.get(MainModule.class);
-        dropdown = new DropdownMenuItem("Pages");
-        main.getMenu().add(dropdown);
-    }
+    public LostDependencies(List<String> aDependencies) {
+        super(
+            "Dependencies are lost:\n\t" +
+            aDependencies.stream()
+                .reduce((a , b) -> a + ",\n\t" + b)
+                .get() + ";"       
+        );
+        dependencies = aDependencies;
+    } 
     
-    /**
-     * Adds item to pages menu.
-     * 
-     * @param aItem item
-     */
-    public void addMenuItem(MenuItem aItem) {
-        dropdown.add(aItem);
+    public List<String> getDependencies() {
+        return dependencies;
     }
-    
-    public void removeMenuItem(MenuItem aItem) {
-        dropdown.remove(aItem);
-    }
-
-    @Override
-    public void uninit() {
-        main.getMenu().remove(dropdown);
-    }
-    
+ 
 }
