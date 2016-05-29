@@ -21,61 +21,74 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules.pages;
+package edu.sibfu.isit.pluginz.framework;
 
-import edu.sibfu.isit.pluginz.modules.Module;
-import edu.sibfu.isit.pluginz.modules.Modules;
-import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import edu.sibfu.isit.pluginz.modules.main.models.DropdownMenuItem;
-import edu.sibfu.isit.pluginz.modules.main.models.MenuItem;
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
+import spark.TemplateViewRoute;
 
 /**
- * Pages module.
+ * Route controller.
  * 
  * @author Max Balushkin
  */
-public class PagesModule extends Module {
-    
-    private DropdownMenuItem dropdown;
-    private MainModule main;
-    
-    /**
-     * Creates pages module.
-     */
-    public PagesModule() {
-        super("pages", "main");
-    }
+public class RenderController implements TemplateViewRoute {
 
-    @Override
-    public void init() {
-        super.init();
-        main = Modules.get(MainModule.class);
-        dropdown = new DropdownMenuItem("Pages");
-        main.getMenu().add(dropdown);
-    }
+    private final String template;
+    private Model model;
     
     /**
-     * Adds item to pages menu.
+     * Creates new route controller.
      * 
-     * @param aItem item
+     * @param aTemplate view
      */
-    public void addMenuItem(MenuItem aItem) {
-        dropdown.add(aItem);
+    public RenderController(String aTemplate) {
+        template = aTemplate;
+        model = Model.empty();
     }
     
-    public void removeMenuItem(MenuItem aItem) {
-        dropdown.remove(aItem);
+    /**
+     * Creates new route controller and binds it with model.
+     * 
+     * @param aTemplate view
+     * @param aModel model
+     */
+    public RenderController(String aTemplate, Model aModel) {
+        template = aTemplate;
+        model = aModel;
     }
-
-    @Override
-    public void uninit() {
-        super.uninit();
-        main.getMenu().remove(dropdown);
+    
+    /**
+     * Returns template name.
+     * 
+     * @return template name
+     */
+    public String getTemplate() {
+        return template;
     }
-
+    
+    /**
+     * Sets model.
+     * 
+     * @param aModel model
+     */
+    public void setModel(Model aModel) {
+        model = aModel;
+    }
+    
+    /**
+     * Returns model.
+     * 
+     * @return model
+     */
+    public Model getModel() {
+        return model;
+    }
+    
     @Override
-    public String toString() {
-        return "Страницы";
+    public ModelAndView handle(Request aRqst, Response aRspns) throws Exception {
+        return new ModelAndView(model.get(), template);
     }
     
 }

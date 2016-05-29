@@ -32,21 +32,20 @@ import spark.Spark;
  *
  * @author Max Balushkin
  */
-public class Halt extends Controller {
+public class Halt implements Controller {
     
     public static final Halt NOT_FOUND = new Halt(404);
     
     private final int code;
     
     public Halt(int aCode) {
-        super("");
         code = aCode;
     }
 
     @Override
-    public ModelAndView handle(Request aRqst, Response aRspns) throws Exception {
+    public Object handle(Request request, Response response) throws Exception {
         Spark.halt(code);
-        return new ModelAndView("", "");
+        return "Not found";
     }
-    
+ 
 }

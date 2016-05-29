@@ -23,6 +23,7 @@
  */
 package edu.sibfu.isit.pluginz.modules;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,6 +91,10 @@ public class Modules {
     public static <T extends Module> boolean has(String aGuid) {
         Module m = get(aGuid);
         return m != null;
+    }
+    
+    public static List<Module> getModules() {
+        return new ArrayList<>(modules.values());
     }
     
 }

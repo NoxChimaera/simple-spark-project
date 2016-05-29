@@ -24,12 +24,17 @@
 package edu.sibfu.isit.pluginz.modules.main;
 
 import edu.sibfu.isit.pluginz.configuration.Routing;
-import edu.sibfu.isit.pluginz.framework.Controller;
+import edu.sibfu.isit.pluginz.framework.RenderController;
 import edu.sibfu.isit.pluginz.http.HttpMethod;
 import edu.sibfu.isit.pluginz.modules.Module;
+import edu.sibfu.isit.pluginz.modules.Modules;
+import edu.sibfu.isit.pluginz.modules.main.models.IndexModel;
 import edu.sibfu.isit.pluginz.modules.main.models.MasterModel;
 import edu.sibfu.isit.pluginz.modules.main.models.MenuModel;
 import java.util.ArrayList;
+import spark.Request;
+import spark.Response;
+import spark.Spark;
 
 /**
  * Main module.
@@ -43,6 +48,7 @@ public class MainModule extends Module {
     private MenuModel menu;
     
     private MasterModel master;
+    private IndexModel index;
     
     /**
      * Creates main module.
@@ -55,7 +61,11 @@ public class MainModule extends Module {
     public void init() {
         menu = new MenuModel(new ArrayList<>());
         master = new MasterModel("Index", menu);
-        Routing.route(HttpMethod.GET, "/", new Controller("index.html", master));
+        index = new IndexModel(master);
+        
+        Routing.route(HttpMethod.GET, "/", new RenderController("index.html", index));
+        Routing.route(HttpMethod.GET, "/module/on/:name", this::handle_registerModule);
+        Routing.route(HttpMethod.GET, "/module/off/:name", this::handle_unregisterModule);
     }
     
     /**
@@ -75,8 +85,35 @@ public class MainModule extends Module {
     public MasterModel getMaster() {
         return master;
     }
+    
+    private Object handle_registerModule(Request request, Response response) throws Exception {
+        String name = request.params(":name");
+        Module m = Modules.get(name);
+        if (m != null && !m.isInitialized()) {
+            m.init();
+        }
+        
+        response.redirect("/");
+        return "";
+    }
+    
+    private Object handle_unregisterModule(Request request, Response response) throws Exception {
+        String name = request.params(":name");
+        Module m = Modules.get(name);
+        if (m != null && m.isInitialized()) {
+            m.uninit();
+        }
+        
+        response.redirect("/");
+        return "";
+    }
 
     @Override
     public void uninit() { }
+
+    @Override
+    public String toString() {
+        return "Платформа";
+    }
    
 }

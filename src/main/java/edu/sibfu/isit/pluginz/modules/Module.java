@@ -90,6 +90,11 @@ public abstract class Module {
         return isInitialized;
     }
     
-    public abstract void uninit();
+    public void uninit() {
+        isInitialized = false;
+    }
+
+    @Override
+    public abstract String toString();
 
 }

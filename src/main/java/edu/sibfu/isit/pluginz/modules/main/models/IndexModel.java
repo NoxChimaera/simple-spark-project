@@ -21,61 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package edu.sibfu.isit.pluginz.modules.pages;
+package edu.sibfu.isit.pluginz.modules.main.models;
 
+import edu.sibfu.isit.pluginz.framework.Model;
 import edu.sibfu.isit.pluginz.modules.Module;
 import edu.sibfu.isit.pluginz.modules.Modules;
-import edu.sibfu.isit.pluginz.modules.main.MainModule;
-import edu.sibfu.isit.pluginz.modules.main.models.DropdownMenuItem;
-import edu.sibfu.isit.pluginz.modules.main.models.MenuItem;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Pages module.
- * 
+ *
  * @author Max Balushkin
  */
-public class PagesModule extends Module {
-    
-    private DropdownMenuItem dropdown;
-    private MainModule main;
-    
-    /**
-     * Creates pages module.
-     */
-    public PagesModule() {
-        super("pages", "main");
-    }
-
-    @Override
-    public void init() {
-        super.init();
-        main = Modules.get(MainModule.class);
-        dropdown = new DropdownMenuItem("Pages");
-        main.getMenu().add(dropdown);
-    }
+public class IndexModel extends Model<Map<String, Object>> {
+   
+    private MasterModel master;
     
     /**
-     * Adds item to pages menu.
-     * 
-     * @param aItem item
+     * Creates new master model.
      */
-    public void addMenuItem(MenuItem aItem) {
-        dropdown.add(aItem);
+    public IndexModel(MasterModel aMaster) {
+        master = aMaster;
     }
     
-    public void removeMenuItem(MenuItem aItem) {
-        dropdown.remove(aItem);
-    }
-
     @Override
-    public void uninit() {
-        super.uninit();
-        main.getMenu().remove(dropdown);
+    public Map<String, Object> get() {
+        Map<String, Object> map = Model.map();
+        map.put("master", master.get());
+        
+        List<Module> modulesObj = Modules.getModules();
+        List<Map<String, Object>> modules = new ArrayList<>();
+        for (Module m : modulesObj) {
+            if ("main".equals(m.getGuid())) continue;
+            
+            Map<String, Object> mm = Model.map();
+            mm.put("name", m.toString());
+            mm.put("guid", m.getGuid());
+            mm.put("status", m.isInitialized());
+            modules.add(mm);
+        }
+        
+        map.put("modules", modules);
+        return map;
     }
-
-    @Override
-    public String toString() {
-        return "Страницы";
-    }
-    
+     
 }

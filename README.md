@@ -10,3 +10,6 @@ Build using cmd `build.bat` (just a wrapper for mvn)
 `java -jar target\Plugin-Platform-0.1-jar-with-dependencies.jar`
 
 or use batch-file `run.bat`
+
+## Known issues
+* Routes can't be removed cause of Spark framework

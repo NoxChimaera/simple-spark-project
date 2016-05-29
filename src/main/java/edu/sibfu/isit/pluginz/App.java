@@ -79,13 +79,14 @@ public class App {
     private static GalleryModule registerGallery() {
         GalleryModule m = new GalleryModule();
         Modules.set(m);
-        m.init();
         
+        m.init();
         m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
         m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
         m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
         m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
         m.addImage(new ImageItem("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-363072.jpg"));
+        m.uninit();
         
         return m;
     }

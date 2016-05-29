@@ -24,6 +24,7 @@
 package edu.sibfu.isit.pluginz.configuration;
 
 import edu.sibfu.isit.pluginz.framework.Controller;
+import edu.sibfu.isit.pluginz.framework.RenderController;
 import edu.sibfu.isit.pluginz.http.HttpMethod;
 import spark.Spark;
 import spark.TemplateEngine;
@@ -42,7 +43,7 @@ public class Routing {
      * @param aPath route path
      * @param aCtrl route controller
      */
-    public static void route(HttpMethod aMethod, String aPath, Controller aCtrl) {
+    public static void route(HttpMethod aMethod, String aPath, RenderController aCtrl) {
         switch (aMethod) {  
             case OPTIONS:
                 options(aPath, aCtrl);
@@ -76,13 +77,39 @@ public class Routing {
         }
     }
     
+    public static void route(HttpMethod aMethod, String aPath, Controller aCtrl) {
+        switch (aMethod) {  
+            case OPTIONS:
+                throw new UnsupportedOperationException("Not implemented yet");
+            case GET:
+                get(aPath, aCtrl);
+                break;
+            case HEAD:
+                throw new UnsupportedOperationException("Not implemented yet");
+            case POST:                
+                throw new UnsupportedOperationException("Not implemented yet");
+            case PUT:               
+                throw new UnsupportedOperationException("Not implemented yet");
+            case PATCH:                
+                throw new UnsupportedOperationException("Not implemented yet");
+            case DELETE:                
+                throw new UnsupportedOperationException("Not implemented yet");
+            case TRACE:                
+                throw new UnsupportedOperationException("Not implemented yet");
+            case CONNECT:                
+                throw new UnsupportedOperationException("Not implemented yet");
+            default:
+                throw new AssertionError(aMethod.name());  
+        }
+    }
+    
     /**
      * Registers new OPTIONS route.
      * 
      * @param aPath route path
      * @param aCtrl route controller
      */
-    public static void options(String aPath, Controller aCtrl) {
+    public static void options(String aPath, RenderController aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.options(aPath, aCtrl, engine);
     }
@@ -93,9 +120,13 @@ public class Routing {
      * @param aPath route path
      * @param aCtrl route controller
      */
-    public static void get(String aPath, Controller aCtrl) {
+    public static void get(String aPath, RenderController aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.get(aPath, aCtrl, engine);
+    }
+    
+    public static void get(String aPath, Controller aCtrl) {
+        Spark.get(aPath, aCtrl);
     }
         
     /**
@@ -104,7 +135,7 @@ public class Routing {
      * @param aPath route path
      * @param aCtrl route controller
      */
-    public static void head(String aPath, Controller aCtrl) {
+    public static void head(String aPath, RenderController aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.head(aPath, aCtrl, engine);
     }
@@ -115,7 +146,7 @@ public class Routing {
      * @param aPath route path
      * @param aCtrl route controller
      */
-    public static void post(String aPath, Controller aCtrl) {
+    public static void post(String aPath, RenderController aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.post(aPath, aCtrl, engine);
     }
@@ -126,7 +157,7 @@ public class Routing {
      * @param aPath route path
      * @param aCtrl route controller
      */
-    public static void put(String aPath, Controller aCtrl) {
+    public static void put(String aPath, RenderController aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.put(aPath, aCtrl, engine);
     }
@@ -137,7 +168,7 @@ public class Routing {
      * @param aPath route path
      * @param aCtrl route controller
      */
-    public static void patch(String aPath, Controller aCtrl) {
+    public static void patch(String aPath, RenderController aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.patch(aPath, aCtrl, engine);
     }
@@ -148,7 +179,7 @@ public class Routing {
      * @param aPath route path
      * @param aCtrl route controller
      */
-    public static void delete(String aPath, Controller aCtrl) {
+    public static void delete(String aPath, RenderController aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.delete(aPath, aCtrl, engine);
     }
@@ -159,7 +190,7 @@ public class Routing {
      * @param aPath route path
      * @param aCtrl route controller
      */
-    public static void trace(String aPath, Controller aCtrl) {
+    public static void trace(String aPath, RenderController aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.trace(aPath, aCtrl, engine);
     }
@@ -170,7 +201,7 @@ public class Routing {
      * @param aPath route path
      * @param aCtrl route controller
      */
-    public static void connect(String aPath, Controller aCtrl) {
+    public static void connect(String aPath, RenderController aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.connect(aPath, aCtrl, engine);
     }

@@ -24,7 +24,7 @@
 package edu.sibfu.isit.pluginz.modules.gallery;
 
 import edu.sibfu.isit.pluginz.configuration.Routing;
-import edu.sibfu.isit.pluginz.framework.Controller;
+import edu.sibfu.isit.pluginz.framework.RenderController;
 import edu.sibfu.isit.pluginz.framework.Halt;
 import edu.sibfu.isit.pluginz.http.HttpMethod;
 import edu.sibfu.isit.pluginz.modules.Module;
@@ -67,9 +67,8 @@ public class GalleryModule extends Module {
         link = new LinkMenuItem("Gallery", getGuid());
         pages.addMenuItem(link);
         
-        Routing.route(HttpMethod.GET, "/gallery", new Controller("gallery.html", model));
+        Routing.route(HttpMethod.GET, "/gallery", new RenderController("gallery.html", model));
     }
-    
     
     /**
      * Adds image to gallery.
@@ -82,8 +81,15 @@ public class GalleryModule extends Module {
 
     @Override
     public void uninit() {
+        super.uninit();
         pages.removeMenuItem(link);
-        Routing.route(HttpMethod.GET, "/gallery", Halt.NOT_FOUND);
+        // Doesn't works :(
+        // Routing.route(HttpMethod.GET, "/gallery", Halt.NOT_FOUND);
+    }
+
+    @Override
+    public String toString() {
+        return "Галерея";
     }
     
 }
