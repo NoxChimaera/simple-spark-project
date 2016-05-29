@@ -1,4 +1,4 @@
-# simple-spark-project
+# Simple Spark Project
 Simple Java «modular» web-application
 
 ## Build
