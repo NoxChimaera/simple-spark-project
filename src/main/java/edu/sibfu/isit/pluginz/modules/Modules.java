@@ -48,10 +48,21 @@ public class Modules {
         modules.put(aClass, aModule);
     }
     
+    /**
+     * Registers module.
+     * 
+     * @param aModule module
+     */
     public static void set(Module aModule) {
         modules.put(aModule.getClass(), aModule);
     }
     
+    /**
+     * Removes module.
+     * 
+     * @param <T>
+     * @param aClass module type
+     */
     public static <T extends Module> void unset(Class<T> aClass) {
         Module m = modules.get(aClass);
         if (m == null) return;
@@ -88,11 +99,23 @@ public class Modules {
         return null;
     }
     
+    /**
+     * Is specified module registered?
+     * 
+     * @param <T>
+     * @param aGuid module GUID
+     * @return true if registered, else false
+     */
     public static <T extends Module> boolean has(String aGuid) {
         Module m = get(aGuid);
         return m != null;
     }
     
+    /**
+     * Returns list of modules.
+     * 
+     * @return modules
+     */
     public static List<Module> getModules() {
         return new ArrayList<>(modules.values());
     }

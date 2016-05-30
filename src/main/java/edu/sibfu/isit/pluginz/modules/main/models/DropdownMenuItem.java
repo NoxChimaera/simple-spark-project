@@ -35,8 +35,8 @@ import java.util.Map;
  */
 public class DropdownMenuItem extends MenuItem {
 
-    private String name;
-    private List<MenuItem> items;
+    private final String name;
+    private final List<MenuItem> items;
    
     /**
      * Creates new dropdown.
@@ -70,6 +70,11 @@ public class DropdownMenuItem extends MenuItem {
         items.add(aItem);
     }
     
+    /**
+     * Removes item from dropdown menu.
+     * 
+     * @param aItem item
+     */
     public void remove(MenuItem aItem) {
         items.remove(aItem);
     }

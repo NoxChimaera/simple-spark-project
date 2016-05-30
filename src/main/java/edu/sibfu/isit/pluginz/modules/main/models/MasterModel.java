@@ -33,8 +33,8 @@ import java.util.Map;
  */
 public class MasterModel extends Model<Map<String, Object>> {
 
-    private String title;
-    private MenuModel menu;
+    private final String title;
+    private final MenuModel menu;
     
     /**
      * Creates new master model.

@@ -24,8 +24,7 @@
 package edu.sibfu.isit.pluginz.modules.gallery;
 
 import edu.sibfu.isit.pluginz.configuration.Routing;
-import edu.sibfu.isit.pluginz.framework.RenderController;
-import edu.sibfu.isit.pluginz.framework.Halt;
+import edu.sibfu.isit.pluginz.framework.Render;
 import edu.sibfu.isit.pluginz.http.HttpMethod;
 import edu.sibfu.isit.pluginz.modules.Module;
 import edu.sibfu.isit.pluginz.modules.Modules;
@@ -67,7 +66,7 @@ public class GalleryModule extends Module {
         link = new LinkMenuItem("Gallery", getGuid());
         pages.addMenuItem(link);
         
-        Routing.route(HttpMethod.GET, "/gallery", new RenderController("gallery.html", model));
+        Routing.route(HttpMethod.GET, "/gallery", new Render("gallery.html", model));
     }
     
     /**

@@ -60,10 +60,17 @@ public abstract class Module {
         isInitialized = false;
     }
     
-    public void init() {
+    /**
+     * Initializes module.
+     * 
+     * @throws LostDependencies if some module dependencies are lost
+     */
+    public void init() throws LostDependencies {
         List<String> lost = new ArrayList<>();
         for (String dependency : dependencies) {
             if (!Modules.has(dependency)) {
+                lost.add(dependency);
+            } else if (!Modules.get(dependency).isInitialized()) {
                 lost.add(dependency);
             }
         }
@@ -82,14 +89,27 @@ public abstract class Module {
         return guid;
     }
     
+    /**
+     * Returns module dependencies GUIDs.
+     * 
+     * @return dependencies GUIDs
+     */
     public final List<String> getDependencies() {
         return dependencies;
     }
     
+    /**
+     * Is module initalized?
+     * 
+     * @return true if initialized, else false
+     */
     public boolean isInitialized() {
         return isInitialized;
     }
     
+    /**
+     * Uninitializes module.
+     */
     public void uninit() {
         isInitialized = false;
     }

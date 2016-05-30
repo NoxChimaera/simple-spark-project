@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class MenuModel extends Model<Object[]> {
 
-    private List<MenuItem> items;
+    private final List<MenuItem> items;
 
     /**
      * Creates new menu.
@@ -61,6 +61,11 @@ public class MenuModel extends Model<Object[]> {
         items.add(aItem);
     }
     
+    /**
+     * Removes item from menu.
+     * 
+     * @param aItem item
+     */
     public void remove(MenuItem aItem) {
         items.remove(aItem);
     }

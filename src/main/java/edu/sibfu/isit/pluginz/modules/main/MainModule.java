@@ -24,7 +24,7 @@
 package edu.sibfu.isit.pluginz.modules.main;
 
 import edu.sibfu.isit.pluginz.configuration.Routing;
-import edu.sibfu.isit.pluginz.framework.RenderController;
+import edu.sibfu.isit.pluginz.framework.Render;
 import edu.sibfu.isit.pluginz.http.HttpMethod;
 import edu.sibfu.isit.pluginz.modules.Module;
 import edu.sibfu.isit.pluginz.modules.Modules;
@@ -34,12 +34,13 @@ import edu.sibfu.isit.pluginz.modules.main.models.MenuModel;
 import java.util.ArrayList;
 import spark.Request;
 import spark.Response;
-import spark.Spark;
 
 /**
  * Main module.
  * Routes:
  *  "/"
+ *  "/module/on/:name"
+ *  "/module/off/:name"
  * 
  * @author Max Balushkin
  */
@@ -59,11 +60,12 @@ public class MainModule extends Module {
 
     @Override
     public void init() {
+        super.init();
         menu = new MenuModel(new ArrayList<>());
         master = new MasterModel("Index", menu);
         index = new IndexModel(master);
         
-        Routing.route(HttpMethod.GET, "/", new RenderController("index.html", index));
+        Routing.route(HttpMethod.GET, "/", new Render("index.html", index));
         Routing.route(HttpMethod.GET, "/module/on/:name", this::handle_registerModule);
         Routing.route(HttpMethod.GET, "/module/off/:name", this::handle_unregisterModule);
     }
@@ -86,6 +88,15 @@ public class MainModule extends Module {
         return master;
     }
     
+    /**
+     * Handles "/module/on/:name" path.
+     * Initializes specified module
+     * 
+     * @param request HTTP request
+     * @param response HTTP response
+     * @return "" (actually redirects to index page)
+     * @throws Exception some Spark exception
+     */
     private Object handle_registerModule(Request request, Response response) throws Exception {
         String name = request.params(":name");
         Module m = Modules.get(name);
@@ -97,6 +108,15 @@ public class MainModule extends Module {
         return "";
     }
     
+    /**
+     * Handles "/module/off/:name" path.
+     * Uninitializes specified module
+     * 
+     * @param request HTTP request
+     * @param response HTTP response
+     * @return "" (actually redirects to index page)
+     * @throws Exception some Spark exception
+     */
     private Object handle_unregisterModule(Request request, Response response) throws Exception {
         String name = request.params(":name");
         Module m = Modules.get(name);

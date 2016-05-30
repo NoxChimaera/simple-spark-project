@@ -33,8 +33,8 @@ import java.util.Map;
  */
 public class LinkMenuItem extends MenuItem {
     
-    private String name;
-    private String href;
+    private final String name;
+    private final String href;
     
     /**
      * Creates new hyperlink item.

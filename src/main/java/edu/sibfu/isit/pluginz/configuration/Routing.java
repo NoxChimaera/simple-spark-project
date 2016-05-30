@@ -24,7 +24,7 @@
 package edu.sibfu.isit.pluginz.configuration;
 
 import edu.sibfu.isit.pluginz.framework.Controller;
-import edu.sibfu.isit.pluginz.framework.RenderController;
+import edu.sibfu.isit.pluginz.framework.Render;
 import edu.sibfu.isit.pluginz.http.HttpMethod;
 import spark.Spark;
 import spark.TemplateEngine;
@@ -41,9 +41,9 @@ public class Routing {
      * 
      * @param aMethod HTTP method, {@link HttpMethod}
      * @param aPath route path
-     * @param aCtrl route controller
+     * @param aCtrl route render
      */
-    public static void route(HttpMethod aMethod, String aPath, RenderController aCtrl) {
+    public static void route(HttpMethod aMethod, String aPath, Render aCtrl) {
         switch (aMethod) {  
             case OPTIONS:
                 options(aPath, aCtrl);
@@ -77,6 +77,13 @@ public class Routing {
         }
     }
     
+    /**
+     * Registers new route.
+     * 
+     * @param aMethod HTTP method
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void route(HttpMethod aMethod, String aPath, Controller aCtrl) {
         switch (aMethod) {  
             case OPTIONS:
@@ -107,9 +114,9 @@ public class Routing {
      * Registers new OPTIONS route.
      * 
      * @param aPath route path
-     * @param aCtrl route controller
+     * @param aCtrl route render
      */
-    public static void options(String aPath, RenderController aCtrl) {
+    public static void options(String aPath, Render aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.options(aPath, aCtrl, engine);
     }
@@ -118,13 +125,19 @@ public class Routing {
      * Registers new GET route.
      * 
      * @param aPath route path
-     * @param aCtrl route controller
+     * @param aCtrl route render
      */
-    public static void get(String aPath, RenderController aCtrl) {
+    public static void get(String aPath, Render aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.get(aPath, aCtrl, engine);
     }
     
+    /**
+     * Registers new GET route.
+     * 
+     * @param aPath route path
+     * @param aCtrl route controller
+     */
     public static void get(String aPath, Controller aCtrl) {
         Spark.get(aPath, aCtrl);
     }
@@ -133,9 +146,9 @@ public class Routing {
      * Registers new HEAD route.
      * 
      * @param aPath route path
-     * @param aCtrl route controller
+     * @param aCtrl route render
      */
-    public static void head(String aPath, RenderController aCtrl) {
+    public static void head(String aPath, Render aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.head(aPath, aCtrl, engine);
     }
@@ -144,9 +157,9 @@ public class Routing {
      * Registers new POST route.
      * 
      * @param aPath route path
-     * @param aCtrl route controller
+     * @param aCtrl route render
      */
-    public static void post(String aPath, RenderController aCtrl) {
+    public static void post(String aPath, Render aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.post(aPath, aCtrl, engine);
     }
@@ -155,9 +168,9 @@ public class Routing {
      * Registers new PUT route.
      * 
      * @param aPath route path
-     * @param aCtrl route controller
+     * @param aCtrl route render
      */
-    public static void put(String aPath, RenderController aCtrl) {
+    public static void put(String aPath, Render aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.put(aPath, aCtrl, engine);
     }
@@ -166,9 +179,9 @@ public class Routing {
      * Registers new PATCH route.
      * 
      * @param aPath route path
-     * @param aCtrl route controller
+     * @param aCtrl route render
      */
-    public static void patch(String aPath, RenderController aCtrl) {
+    public static void patch(String aPath, Render aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.patch(aPath, aCtrl, engine);
     }
@@ -177,9 +190,9 @@ public class Routing {
      * Registers new DELETE route.
      * 
      * @param aPath route path
-     * @param aCtrl route controller
+     * @param aCtrl route render
      */
-    public static void delete(String aPath, RenderController aCtrl) {
+    public static void delete(String aPath, Render aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.delete(aPath, aCtrl, engine);
     }
@@ -188,9 +201,9 @@ public class Routing {
      * Registers new TRACE route.
      * 
      * @param aPath route path
-     * @param aCtrl route controller
+     * @param aCtrl route render
      */
-    public static void trace(String aPath, RenderController aCtrl) {
+    public static void trace(String aPath, Render aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.trace(aPath, aCtrl, engine);
     }
@@ -199,9 +212,9 @@ public class Routing {
      * Registers new CONNECT route.
      * 
      * @param aPath route path
-     * @param aCtrl route controller
+     * @param aCtrl route render
      */
-    public static void connect(String aPath, RenderController aCtrl) {
+    public static void connect(String aPath, Render aCtrl) {
         TemplateEngine engine = Configuration.getTemplateEngine();
         Spark.connect(aPath, aCtrl, engine);
     }

@@ -10,11 +10,11 @@
           <div class="btn-group" role="group">
             <#if module.status == true>
               <a href="/" class="btn btn-success disabled">Activate</a>  
-              <a href="/module/off/${module.guid}" class="btn btn-default">Deactivate</a>  
+              <a href="/module/off/${module.guid}" class="btn btn-danger">Deactivate</a>  
             </#if>
             <#if module.status == false>
               <a href="/module/on/${module.guid}" class="btn btn-success">Activate</a>  
-              <a href="/" class="btn btn-default disabled">Deactivate</a>  
+              <a href="/" class="btn btn-danger disabled">Deactivate</a>  
             </#if>
           </div>
         </div>

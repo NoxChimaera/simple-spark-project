@@ -29,11 +29,11 @@ import spark.Response;
 import spark.TemplateViewRoute;
 
 /**
- * Route controller.
+ * Route controller which renders HTML-page.
  * 
  * @author Max Balushkin
  */
-public class RenderController implements TemplateViewRoute {
+public class Render implements TemplateViewRoute {
 
     private final String template;
     private Model model;
@@ -43,7 +43,7 @@ public class RenderController implements TemplateViewRoute {
      * 
      * @param aTemplate view
      */
-    public RenderController(String aTemplate) {
+    public Render(String aTemplate) {
         template = aTemplate;
         model = Model.empty();
     }
@@ -54,7 +54,7 @@ public class RenderController implements TemplateViewRoute {
      * @param aTemplate view
      * @param aModel model
      */
-    public RenderController(String aTemplate, Model aModel) {
+    public Render(String aTemplate, Model aModel) {
         template = aTemplate;
         model = aModel;
     }

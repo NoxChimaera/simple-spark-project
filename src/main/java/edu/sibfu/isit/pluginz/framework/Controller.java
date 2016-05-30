@@ -28,7 +28,8 @@ import spark.Response;
 import spark.Route;
 
 /**
- *
+ * Route controller.
+ * 
  * @author Max Balushkin
  */
 @FunctionalInterface

@@ -23,21 +23,30 @@
  */
 package edu.sibfu.isit.pluginz.framework;
 
-import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Spark;
 
 /**
- *
+ * Route controller. 
+ * Sends specified status code.
+ * 
  * @author Max Balushkin
  */
 public class Halt implements Controller {
     
+    /**
+     * Not Found 404
+     */
     public static final Halt NOT_FOUND = new Halt(404);
     
     private final int code;
     
+    /**
+     * Creates new halt-controller.
+     * 
+     * @param aCode status code
+     */
     public Halt(int aCode) {
         code = aCode;
     }

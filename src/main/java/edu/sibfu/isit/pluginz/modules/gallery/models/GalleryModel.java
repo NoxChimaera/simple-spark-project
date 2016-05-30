@@ -36,8 +36,8 @@ import java.util.Map;
  */
 public class GalleryModel extends Model<Map<String, Object>> {
     
-    private MasterModel master;
-    private List<ImageItem> imgs;
+    private final MasterModel master;
+    private final List<ImageItem> imgs;
     
     /**
      * Creates new gallery model.

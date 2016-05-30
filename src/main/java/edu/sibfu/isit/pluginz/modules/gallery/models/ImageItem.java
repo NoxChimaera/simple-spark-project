@@ -33,8 +33,8 @@ import java.util.Map;
  */
 public class ImageItem extends Model<Map<String, Object>> {
     
-    private String href;
-    private String alt;
+    private final String href;
+    private final String alt;
     
     /**
      * Creates new image with empty alternate text.

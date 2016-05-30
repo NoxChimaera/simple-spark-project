@@ -31,15 +31,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Index page model.
+ * Contains master and list of modules
+ * 
  * @author Max Balushkin
  */
 public class IndexModel extends Model<Map<String, Object>> {
    
-    private MasterModel master;
+    private final MasterModel master;
     
     /**
-     * Creates new master model.
+     * Creates new index model.
+     * 
+     * @param aMaster master model
      */
     public IndexModel(MasterModel aMaster) {
         master = aMaster;

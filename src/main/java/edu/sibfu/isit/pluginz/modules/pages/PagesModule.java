@@ -63,6 +63,11 @@ public class PagesModule extends Module {
         dropdown.add(aItem);
     }
     
+    /**
+     * Removes item from menu.
+     *
+     * @param aItem item
+     */
     public void removeMenuItem(MenuItem aItem) {
         dropdown.remove(aItem);
     }

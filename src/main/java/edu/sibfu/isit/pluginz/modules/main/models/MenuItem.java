@@ -47,7 +47,7 @@ public abstract class MenuItem extends Model<Map<String, Object>> {
         Dropdown
     }
     
-    private Type type;
+    private final Type type;
     
     /**
      * Creates new menu item.

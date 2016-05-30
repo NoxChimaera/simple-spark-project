@@ -26,13 +26,19 @@ package edu.sibfu.isit.pluginz.modules;
 import java.util.List;
 
 /**
- *
+ * Throwed if some modules dependencies are lost.
+ * 
  * @author Max Balushkin
  */
 public class LostDependencies extends RuntimeException {
     
     private final List<String> dependencies;
     
+    /**
+     * Creates new LostDependencies exception.
+     * 
+     * @param aDependencies lost dependencies GUIDs
+     */
     public LostDependencies(List<String> aDependencies) {
         super(
             "Dependencies are lost:\n\t" +
@@ -43,6 +49,11 @@ public class LostDependencies extends RuntimeException {
         dependencies = aDependencies;
     } 
     
+    /**
+     * Returns lost dependencies GUIDs.
+     * 
+     * @return GUIDs
+     */
     public List<String> getDependencies() {
         return dependencies;
     }
